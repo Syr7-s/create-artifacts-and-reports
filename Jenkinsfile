@@ -7,12 +7,12 @@ pipeline {
                 git branch: 'main',
                     changelog: false,
                     poll: false,
-                    url: 'https://github.com/LinkedInLearning/essential-jenkins-2468076.git'
+                    url: 'https://github.com/Syr7-s/create-artifacts-and-reports.git'
             }
         }
         stage('Clean') {
             steps {
-                dir("${env.WORKSPACE}/Ch05/05_04-challenge-create-artifacts-and-reports"){
+                dir("${env.WORKSPACE}"){
                     echo "Cleaning the workspace..."
                     // Uncomment the following line after Maven is configured as a global tool
                     // sh 'mvn clean'
@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                dir("${env.WORKSPACE}/Ch05/05_04-challenge-create-artifacts-and-reports"){
+                dir("${env.WORKSPACE}"){
                     echo "Running tests..."
                     // Uncomment the following line after Maven is configured as a global tool
                     // sh 'mvn test'
@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Package') {
             steps {
-                dir("${env.WORKSPACE}/Ch05/05_04-challenge-create-artifacts-and-reports"){
+                dir("${env.WORKSPACE}"){
                     echo "Creating the JAR file..."
                     // Uncomment the following line after Maven is configured as a global tool
                     // sh 'mvn package -DskipTests'
