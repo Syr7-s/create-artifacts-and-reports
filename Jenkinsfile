@@ -1,10 +1,13 @@
 pipeline {
     agent any
-    // Add a tool configuration here...
+    tools {
+      maven 'Maven'
+    }
     stages {
         stage('Source') {
             steps {
-                git branch: 'main',
+                sh 'mvn --version'
+                git branch: 'devisa',
                     changelog: false,
                     poll: false,
                     url: 'https://github.com/Syr7-s/create-artifacts-and-reports.git'
@@ -15,7 +18,7 @@ pipeline {
                 dir("${env.WORKSPACE}"){
                     echo "Cleaning the workspace..."
                     // Uncomment the following line after Maven is configured as a global tool
-                    // sh 'mvn clean'
+                    sh 'mvn clean'
                 }
             }
         }
@@ -24,7 +27,7 @@ pipeline {
                 dir("${env.WORKSPACE}"){
                     echo "Running tests..."
                     // Uncomment the following line after Maven is configured as a global tool
-                    // sh 'mvn test'
+                    sh 'mvn test'
                 }
             }
         }
@@ -33,7 +36,7 @@ pipeline {
                 dir("${env.WORKSPACE}"){
                     echo "Creating the JAR file..."
                     // Uncomment the following line after Maven is configured as a global tool
-                    // sh 'mvn package -DskipTests'
+                    sh 'mvn package -DskipTests'
                 }
             }
         }
@@ -42,9 +45,16 @@ pipeline {
         always {
             echo "Collecting jUnit test results..."
             // Add jUnit report collection here...
+            junit allowEmptyResults: true, testResults: '**/TEST-AppTest.xml'
 
             echo "Archiving the JAR file..."
             // Add artifact archiving here...
+            archiveArtifacts allowEmptyArchive: true,
+                artifacts: '**/hello-1.0-SNAPSHOT.jar',
+                fingerprint: true,
+                followSymlinks: false,
+                onlyIfSuccessful: true
+            
         }
     }
 }
