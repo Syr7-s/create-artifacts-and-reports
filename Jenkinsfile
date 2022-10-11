@@ -45,7 +45,8 @@ pipeline {
         always {
             echo "Collecting jUnit test results..."
             // Add jUnit report collection here...
-            junit allowEmptyResults: true, testResults: '**/TEST-AppTest.xml'
+            junit allowEmptyResults: true,
+                testResults: '**/TEST-com.learningjenkins.AppTest.xml'
 
             echo "Archiving the JAR file..."
             // Add artifact archiving here...
