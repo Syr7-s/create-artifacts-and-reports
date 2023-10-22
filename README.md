@@ -1,4 +1,4 @@
-# 05_04 Challenge Create artifacts and reports
+Create artifacts and reports
 You’re on a development team working on a new Java application.
 
 You've been assigned to develop a Jenkins pipeline that tests the application code and creates a report that the team can review.  Specifically, the test stage creates  test report using the JUnit format.
